@@ -32,6 +32,9 @@ class Router
     # Call the controller's method here (which must return a view)
     view = @routes[pattern]()
 
+    if not view
+      throw "Controller did not return a view for route '#{pattern}'"
+
     existingPage = view.findHtmlElement('[data-role="page"]')
 
     if existingPage.length > 1
